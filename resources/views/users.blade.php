@@ -6,7 +6,6 @@
         <tr>
             <th>Row</th>
             <th>Users Name</th>
-             
         </tr>
     </thead>
     <tbody>

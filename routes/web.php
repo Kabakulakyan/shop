@@ -37,8 +37,8 @@ Route::get('/add-product', [ProductController::class, 'addProd'])->name('addProd
 Route::get('/add-product', [ProductController::class, 'addProd'])->name('addProd');
 Route::get('/', [ProductController::class, 'showCategories_market'])->name('mark');
 Route::get('/search', [ProductController::class, 'search'])->name('search');
-
-
+Route::post('/prod', [ProductController::class, 'prod'])->name('prod');
+Route::post('/add_mterq', [ProductController::class, 'add_mterq'])->name('add_mterq');
 });
 // Route::get('test', '../app/Http/Controllers/TestController@index');
 Route::get('/login', [TestController::class, 'login'])->name('Home');

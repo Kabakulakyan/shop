@@ -10,7 +10,7 @@
         @csrf
         <div class="form-group">
           <label for="exampleInputEmail1">User</label>
-          <select name="userId" class="form-control" id="exampleFormControlSelect2">
+          <select required name="userId" class="form-control" id="exampleFormControlSelect2">
             @foreach($users as $user)
               <option name="userId" value="{{$user->id}}">{{$user->name}}</option>
             @endforeach
@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Category</label>
-          <select name="category" class="form-control" id="exampleFormControlSelect2">
+          <select required name="category" class="form-control" id="exampleFormControlSelect2">
           @foreach($categories as $category)
             
               <option  value="{{$category->id}}">{{$category->name}}</option>
@@ -38,17 +38,17 @@
     
         <div class="form-group">
           <label for="exampleInputEmail1">Name</label>
-          <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name" value="{{ old('name') }}">
+          <input required type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name" value="{{ old('name') }}">
         </div>
     
         <div class="form-group">
           <label for="exampleInputEmail1">Type</label>
-          <input type="text" name="type" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type" value="{{ old('Type') }}" >
+          <input required type="text" name="type" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type" value="{{ old('Type') }}" >
         </div>
     
         <div class="form-group">
           <label for="exampleInputEmail1">Price</label>
-          <input type="number" name="price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Price" value="{{ old('Price') }}" >
+          <input required type="number" name="price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Price" value="{{ old('Price') }}" >
         </div>
         {{-- <div class="form-group">
           <label for="exampleInputEmail1">Imag</label>
@@ -56,11 +56,13 @@
         </div> --}}
         <div class="form-group">
           <label for="exampleInputEmail1">Photo</label>
-          <input type="file" name="photo[]" class="form-control" id="image" multiple>
+          <input type="file" name="photo[]" class="form-control" id="image" multiple class="nkr" >
         </div>
 
         <div class="col-sm-4">
-          <div id="images" style="width:150px; height:150px"></div>
+          <div id="images" style="width:150px; height:150px">
+              
+          </div>
       </div>
         {{-- <div class="form-group">
           <label for="exampleInputEmail1">Photo1</label>
@@ -103,39 +105,30 @@
         $('#image').change(function(){
           
           for (let i = 0; i < this.files.length; i++) {
-            // console.log(this.files[i])
+            console.log(this.files[i])
             let reader = new FileReader();
             reader.onload = (e) => { 
-              $('#images').append(`<img src="${e.target.result}">`)
+              $('#images').append(`<div> <div id="btn" style="background: white;
+    cursor: pointer;
+    width: 7%;
+    border: 1px #2a6394 solid;
+    border-radius: 30px;
+    font-weight: 100;
+    color: darkgreen;
+    height: 23px;">
+                x  
+              </div><img class="img" src="${e.target.result}"></div>`)
             }
             reader.readAsDataURL(this.files[i]);
             }
 
           });
+          $(document).on('click', '#btn',function(){
+              $(this).parent().remove()
+            
+          })
           
           });
-            // this.files.forEach((el) => {
-              //   let reader = new FileReader();
-          //   reader.onload = (e) => { 
-          //     $('#images').append(`<img src="${e.target.result}">`)
-          //   }
-          //   reader.readAsDataURL(el);
-          // })
-          
-          // let reader = new FileReader();
-       
-          // reader.onload = (e) => { 
-          //   console.log(e.target);
-          //   // $('#preview-image-before-upload').attr('src', e.target.result); 
-          // }
-          // for (let i = 0; i < this.files.length; i++) {
-          //   reader.readAsDataURL(this.files[i]);
-            
-          // }
-           
-          // reader.readAsDataURL(this.files[1]);
-         
-       
       </script>
     </div>
   </div>

@@ -12,7 +12,7 @@
                 {{-- <li>{{}}</li> --}}
                     @foreach($category->productsCategory as $pro)
                     {{-- @dd($pro->image[0]); --}}
-                        <a href="#" style="background-color: red ;text-decoration: none; color:wheat ;  border:black 1px solid ; margin-top:5px"  ><img style="width:100%;height:100px" src="{{asset('uploads/'.$pro->image[0]['img'])}}" alt="">{{ $pro->name }} <br> price  {{ $pro->price }} </a href="#">
+                        <a href="#" style="background-color: red ;text-decoration: none; color:wheat ;  border:black 1px solid ; margin-top:5px"  ><img id="imeg" style="width:100%;height:100px" src="{{asset('uploads/'.$pro->image[0]['img'])}}" alt="">{{ $pro->name }} <br> price  {{ $pro->price }} </a href="#">
                             <button style="background-color: aquamarine" class="btn btn-success">buy</button>
                     
                     @endforeach
@@ -57,9 +57,15 @@
            flex-direction: column; width:20% ">
                 @foreach($products as $pro)
                         {{-- @dd($pro->image[0]);<div style=" margin-top:4px" >  --}}
-                    <a  href="#" style="background-color: red ;text-decoration: none; color:wheat ;  border:black 1px solid ; margin-top:1px"  ><img style="width:100%;height:100px" src="{{asset('uploads/'.$pro->image[0]['img'])}}" alt="">{{ $pro->name }} <br> price  {{ $pro->price }} <br> </a href="#">
+                    <form action="{{route('add_mterq')}}" method="post">
+                        @csrf
+                            <img style="width:100%;height:100px" src="{{asset('uploads/'.$pro->image[0]['img'])}}" alt=""><p name="anun" value="{{ $pro->name }}">{{ $pro->name }} </p> <br> price  {{ $pro->price }} 
+                            {{-- @dd($pro) --}}
+                            <input type="hidden" name="inp" value="{{$pro}}">
+                            {{-- @dd($pro) --}}
+                            <br> 
                         <button style="background-color: aquamarine" class="btn btn-success">buy</button>
-                          
+                    </form>      
                 @endforeach
            </div>
            
@@ -70,7 +76,9 @@
 
         </div>
         <div class="col-sm-1">
-            <button style="position: absolute;
+            <form action="prod" method="post">
+            @csrf
+           <button style="position: absolute;
             top: 10px;
             right: 10px;
             width: 200px;
@@ -85,9 +93,21 @@
                 font-size: 35px;
                 color: greenyellow;"></i> 
                 </button>
-               
+                <input type="hidden" name="inp" value="{{$pro}}">
+            </form>
         </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript">
+      
+      $(document).ready(function (e) {
+        
+        
+        $('#imeg').click(function(){
+            this.style.width = "50px"
+        });
+        });
+      </script>
 @endsection

@@ -155,6 +155,7 @@ class ProductController extends Controller
                         $imeg['img'] =$img; 
                         $imeg['product_id'] = $products->id;
                         $imeg -> save();
+                        dd($imeg);
                     }
                 // }
                     
@@ -240,5 +241,24 @@ class ProductController extends Controller
         // dd($prod->all());
         return view('market', compact("prod","categories","products"));
     }
-
+    public function prod(Request $request){
+        $product = $request->inp;
+        $products = json_decode($product);
+        return view('prod',compact("products"));
+    }
+    public function add_mterq(Request $request){
+        // $add = $request->all();
+        $product = $request->inp;
+        $products = json_decode($product);
+        // dd($products);
+        // dd($products);
+        // $products = $request->input('inp');
+        // $prod = explode(',',$products);
+        // foreach $products as $key) {
+            // dd($key);
+        // };
+        
+        // dd($request->input('inp'));
+        return view('prod',compact("products"));
+    }
 }
